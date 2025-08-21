@@ -151,12 +151,31 @@
         .toggle-switch.active::after {
             left: 32px;
         }
+        
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+        
+        @keyframes float-delayed {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-15px); }
+        }
+        
+        .animate-float {
+            animation: float 3s ease-in-out infinite;
+        }
+        
+        .animate-float-delayed {
+            animation: float-delayed 4s ease-in-out infinite 1s;
+        }
     </style>
 </head>
 <body>
     <!-- Floating Pill Navigation -->
-    <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 pill-nav rounded-full px-6 py-3">
-        <div class="flex items-center space-x-6">
+    <nav class="fixed top-4 left-1/2 transform -translate-x-1/2 z-50 pill-nav rounded-full px-3 md:px-6 py-2 md:py-3 w-11/12 md:w-auto max-w-6xl">
+        <!-- Desktop Navigation -->
+        <div class="hidden md:flex items-center justify-center space-x-6">
             <a href="#home" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
                 <i class="fas fa-home mr-1"></i>
                 <span data-en="Home" data-es="Inicio">Home</span>
@@ -192,48 +211,180 @@
                 <i class="fas fa-moon text-xs"></i>
             </div>
         </div>
+
+        <!-- Mobile Navigation -->
+        <div class="md:hidden flex items-center justify-between w-full">
+            <div class="flex items-center space-x-3">
+                <button id="mobileMenuToggle" class="text-lg">
+                    <i class="fas fa-bars"></i>
+                </button>
+                <span class="font-display font-semibold text-lg">LUDO'S</span>
+            </div>
+            
+            <div class="flex items-center space-x-3">
+                <!-- Language Toggle Mobile -->
+                <div class="flex items-center space-x-1">
+                    <span class="text-xs">EN</span>
+                    <div class="toggle-switch scale-75" id="langToggleMobile"></div>
+                    <span class="text-xs">ES</span>
+                </div>
+                
+                <!-- Theme Toggle Mobile -->
+                <div class="flex items-center space-x-1">
+                    <i class="fas fa-sun text-xs"></i>
+                    <div class="toggle-switch scale-75" id="themeToggleMobile"></div>
+                    <i class="fas fa-moon text-xs"></i>
+                </div>
+            </div>
+        </div>
+
+        <!-- Mobile Menu Dropdown -->
+        <div id="mobileMenu" class="md:hidden absolute top-full left-0 right-0 mt-2 pill-nav rounded-2xl px-4 py-4 transform scale-95 opacity-0 pointer-events-none transition-all duration-300">
+            <div class="flex flex-col space-y-3">
+                <a href="#home" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors flex items-center">
+                    <i class="fas fa-home mr-2 w-4"></i>
+                    <span data-en="Home" data-es="Inicio">Home</span>
+                </a>
+                <a href="#menu" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors flex items-center">
+                    <i class="fas fa-utensils mr-2 w-4"></i>
+                    <span data-en="Menu" data-es="Menú">Menu</span>
+                </a>
+                <a href="#reservations" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors flex items-center">
+                    <i class="fas fa-calendar mr-2 w-4"></i>
+                    <span data-en="Reserve" data-es="Reservar">Reserve</span>
+                </a>
+                <a href="#reviews" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors flex items-center">
+                    <i class="fas fa-star mr-2 w-4"></i>
+                    <span data-en="Reviews" data-es="Reseñas">Reviews</span>
+                </a>
+                <a href="#location" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors flex items-center">
+                    <i class="fas fa-map-marker-alt mr-2 w-4"></i>
+                    <span data-en="Location" data-es="Ubicación">Location</span>
+                </a>
+            </div>
+        </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
-        <div class="absolute inset-0 opacity-10">
-            <svg viewBox="0 0 100 100" class="w-full h-full">
-                <defs>
-                    <pattern id="tiles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
-                        <rect width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.5"/>
-                        <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.3"/>
-                    </pattern>
-                </defs>
-                <rect width="100%" height="100%" fill="url(#tiles)"/>
-            </svg>
+    <section id="home" class="min-h-screen relative overflow-hidden flex items-center">
+        <!-- Background Image -->
+        <div class="absolute inset-0 z-0">
+            <img src="https://www.instagram.com/p/CuJzh5prO4S/media/?size=l" 
+                 alt="LUDO'S Brunch Scene" 
+                 class="w-full h-full object-cover"
+                 onerror="this.style.display='none'; this.nextElementSibling.style.display='block';">
+            <!-- Fallback gradient background -->
+            <div class="w-full h-full hero-gradient" style="display: none;"></div>
         </div>
         
-        <div class="container mx-auto px-6 text-center relative z-10">
-            <div class="animate-fade-in">
-                <h1 class="font-display text-6xl md:text-8xl font-bold mb-6 parallax">
-                    LUDO'S
-                </h1>
-                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto font-light" data-en="Your Lisbon brunch refuge—fresh, friendly, unforgettable." data-es="Tu refugio de brunch en Lisboa—fresco, amigable, inolvidable.">
-                    Your Lisbon brunch refuge—fresh, friendly, unforgettable.
-                </p>
+        <!-- Overlay -->
+        <div class="absolute inset-0 bg-black bg-opacity-40 z-10"></div>
+        
+        <!-- Content -->
+        <div class="container mx-auto px-6 relative z-20">
+            <div class="grid lg:grid-cols-2 gap-12 items-center min-h-screen py-20">
+                <!-- Left Content -->
+                <div class="text-white animate-fade-in">
+                    <div class="mb-6">
+                        <span class="inline-block px-4 py-2 bg-white bg-opacity-20 backdrop-blur-sm rounded-full text-sm font-medium mb-4">
+                            <span data-en="Hidden Gem in Alfama" data-es="Joya Escondida en Alfama">Hidden Gem in Alfama</span>
+                        </span>
+                    </div>
+                    
+                    <h1 class="font-display text-5xl md:text-7xl lg:text-8xl font-bold mb-6 leading-tight">
+                        LUDO'S
+                    </h1>
+                    
+                    <p class="text-xl md:text-2xl mb-8 font-light leading-relaxed" data-en="Where authentic Portuguese hospitality meets exceptional brunch. Discover fresh ingredients, cozy atmosphere, and unforgettable flavors in the heart of Lisbon's historic Castelo district." data-es="Donde la auténtica hospitalidad portuguesa se encuentra con un brunch excepcional. Descubre ingredientes frescos, ambiente acogedor y sabores inolvidables en el corazón del histórico distrito del Castelo de Lisboa.">
+                        Where authentic Portuguese hospitality meets exceptional brunch. Discover fresh ingredients, cozy atmosphere, and unforgettable flavors in the heart of Lisbon's historic Castelo district.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4 mb-8">
+                        <button class="group bg-white text-black px-8 py-4 rounded-full font-semibold hover:bg-yellow-400 transition-all duration-300 transform hover:scale-105 hover:shadow-2xl" data-en="Explore Menu" data-es="Explorar Menú">
+                            <span data-en="Explore Menu" data-es="Explorar Menú">Explore Menu</span>
+                            <i class="fas fa-arrow-right ml-2 group-hover:translate-x-1 transition-transform"></i>
+                        </button>
+                        <button class="border-2 border-white text-white px-8 py-4 rounded-full font-semibold hover:bg-white hover:text-black transition-all duration-300 transform hover:scale-105" data-en="Book Table" data-es="Reservar Mesa">
+                            <i class="fas fa-calendar mr-2"></i>
+                            <span data-en="Book Table" data-es="Reservar Mesa">Book Table</span>
+                        </button>
+                    </div>
+                    
+                    <!-- Quick Info -->
+                    <div class="flex flex-wrap gap-6 text-sm">
+                        <div class="flex items-center">
+                            <i class="fas fa-clock mr-2 text-yellow-400"></i>
+                            <span data-en="Daily 9AM - 5PM" data-es="Diario 9AM - 5PM">Daily 9AM - 5PM</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt mr-2 text-yellow-400"></i>
+                            <span>Beco do Recolhimento, Alfama</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-star mr-2 text-yellow-400"></i>
+                            <span data-en="5-Star Reviews" data-es="Reseñas 5 Estrellas">5-Star Reviews</span>
+                        </div>
+                    </div>
+                </div>
                 
-                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
-                    <button class="neumorphic px-8 py-4 font-semibold hover-glow transition-all duration-300" data-en="View Menu" data-es="Ver Menú">
-                        View Menu
-                    </button>
-                    <button class="neumorphic px-8 py-4 font-semibold hover-glow transition-all duration-300" data-en="Reserve a Table" data-es="Reservar Mesa">
-                        Reserve a Table
-                    </button>
+                <!-- Right Content - Feature Cards -->
+                <div class="space-y-6 animate-fade-in">
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-6 border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-yellow-400 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-utensils text-black text-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white" data-en="Signature Brunch" data-es="Brunch Especial">Signature Brunch</h3>
+                        </div>
+                        <p class="text-white text-opacity-90" data-en="Famous eggs Benedict, fresh croissants, and artisan coffee in a cozy setting" data-es="Famosos huevos Benedict, croissants frescos y café artesanal en un ambiente acogedor">
+                            Famous eggs Benedict, fresh croissants, and artisan coffee in a cozy setting
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-6 border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-green-400 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-leaf text-black text-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white" data-en="Fresh & Local" data-es="Fresco y Local">Fresh & Local</h3>
+                        </div>
+                        <p class="text-white text-opacity-90" data-en="Locally sourced ingredients and seasonal specialties from Portuguese markets" data-es="Ingredientes de origen local y especialidades de temporada de los mercados portugueses">
+                            Locally sourced ingredients and seasonal specialties from Portuguese markets
+                        </p>
+                    </div>
+                    
+                    <div class="bg-white bg-opacity-10 backdrop-blur-lg rounded-3xl p-6 border border-white border-opacity-20 hover:bg-opacity-20 transition-all duration-300">
+                        <div class="flex items-center mb-4">
+                            <div class="w-12 h-12 bg-pink-400 rounded-full flex items-center justify-center mr-4">
+                                <i class="fas fa-heart text-black text-lg"></i>
+                            </div>
+                            <h3 class="text-xl font-semibold text-white" data-en="Authentic Experience" data-es="Experiencia Auténtica">Authentic Experience</h3>
+                        </div>
+                        <p class="text-white text-opacity-90" data-en="Warm Portuguese hospitality in the historic heart of Alfama district" data-es="Cálida hospitalidad portuguesa en el corazón histórico del barrio de Alfama">
+                            Warm Portuguese hospitality in the historic heart of Alfama district
+                        </p>
+                    </div>
                 </div>
             </div>
         </div>
         
-        <!-- Floating Elements -->
-        <div class="absolute top-20 left-10 animate-bounce">
-            <div class="w-4 h-4 bg-yellow-400 rounded-full opacity-60"></div>
+        <!-- Decorative Elements -->
+        <div class="absolute bottom-10 left-10 animate-float z-20">
+            <div class="w-8 h-8 bg-yellow-400 rounded-full opacity-60 animate-pulse"></div>
         </div>
-        <div class="absolute bottom-32 right-16 animate-pulse">
-            <div class="w-6 h-6 bg-orange-300 rounded-full opacity-40"></div>
+        <div class="absolute top-1/4 right-10 animate-float-delayed z-20">
+            <div class="w-6 h-6 bg-white rounded-full opacity-40 animate-bounce"></div>
+        </div>
+        <div class="absolute bottom-1/3 right-1/4 animate-float z-20">
+            <div class="w-4 h-4 bg-green-400 rounded-full opacity-50 animate-pulse"></div>
+        </div>
+        
+        <!-- Scroll Indicator -->
+        <div class="absolute bottom-8 left-1/2 transform -translate-x-1/2 z-20 animate-bounce">
+            <div class="flex flex-col items-center text-white">
+                <span class="text-sm mb-2" data-en="Scroll to explore" data-es="Desplázate para explorar">Scroll to explore</span>
+                <i class="fas fa-chevron-down text-xl"></i>
+            </div>
         </div>
     </section>
 
@@ -627,15 +778,40 @@
             });
         });
         
-        // Parallax effect
-        window.addEventListener('scroll', () => {
-            const scrolled = window.pageYOffset;
-            const parallaxElements = document.querySelectorAll('.parallax');
-            
-            parallaxElements.forEach(element => {
-                const speed = 0.5;
-                element.style.setProperty('--scroll-y', `${scrolled * speed}px`);
+        // Mobile menu functionality
+        const mobileMenuToggle = document.getElementById('mobileMenuToggle');
+        const mobileMenu = document.getElementById('mobileMenu');
+        const langToggleMobile = document.getElementById('langToggleMobile');
+        const themeToggleMobile = document.getElementById('themeToggleMobile');
+        
+        mobileMenuToggle.addEventListener('click', () => {
+            const isOpen = mobileMenu.classList.contains('scale-100');
+            if (isOpen) {
+                mobileMenu.classList.remove('scale-100', 'opacity-100', 'pointer-events-auto');
+                mobileMenu.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
+            } else {
+                mobileMenu.classList.remove('scale-95', 'opacity-0', 'pointer-events-none');
+                mobileMenu.classList.add('scale-100', 'opacity-100', 'pointer-events-auto');
+            }
+        });
+        
+        // Close mobile menu when clicking on links
+        document.querySelectorAll('#mobileMenu a').forEach(link => {
+            link.addEventListener('click', () => {
+                mobileMenu.classList.remove('scale-100', 'opacity-100', 'pointer-events-auto');
+                mobileMenu.classList.add('scale-95', 'opacity-0', 'pointer-events-none');
             });
+        });
+        
+        // Sync mobile toggles with desktop toggles
+        langToggleMobile.addEventListener('click', () => {
+            langToggle.click();
+            langToggleMobile.classList.toggle('active');
+        });
+        
+        themeToggleMobile.addEventListener('click', () => {
+            themeToggle.click();
+            themeToggleMobile.classList.toggle('active');
         });
         
         // Reviews carousel
@@ -738,5 +914,5 @@
             });
         });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972a7c4ff36df82b',t:'MTc1NTc4MzAzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972a8fcd92ca3a2b',t:'MTc1NTc4MzgzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
