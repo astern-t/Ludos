@@ -1,0 +1,509 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LUDO'S Beco - Hidden Brunch Gem in Lisbon</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        
+        :root {
+            --primary-dark: #1a1a1a;
+            --secondary-dark: #2d2d2d;
+            --accent-red: #ff4444;
+            --accent-orange: #ff6b35;
+            --text-white: #ffffff;
+            --text-gray: #b0b0b0;
+            --gold-accent: #ffd700;
+        }
+        
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+        
+        body {
+            font-family: 'Inter', sans-serif;
+            background-color: var(--primary-dark);
+            color: var(--text-white);
+            overflow-x: hidden;
+        }
+        
+        .font-display {
+            font-family: 'Playfair Display', serif;
+        }
+        
+        .hero-image {
+            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 68, 68, 0.1) 100%),
+                        url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
+            background-size: cover;
+            background-position: center;
+            background-repeat: no-repeat;
+        }
+        
+        .gradient-text {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .btn-primary {
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+            transition: all 0.3s ease;
+            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        }
+        
+        .btn-primary:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        }
+        
+        .btn-secondary {
+            border: 2px solid var(--accent-red);
+            color: var(--text-white);
+            transition: all 0.3s ease;
+        }
+        
+        .btn-secondary:hover {
+            background-color: var(--accent-red);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 25px rgba(255, 68, 68, 0.3);
+        }
+        
+        .nav-link {
+            position: relative;
+            transition: all 0.3s ease;
+        }
+        
+        .nav-link:hover {
+            color: var(--accent-orange);
+        }
+        
+        .nav-link::after {
+            content: '';
+            position: absolute;
+            width: 0;
+            height: 2px;
+            bottom: -5px;
+            left: 50%;
+            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
+            transition: all 0.3s ease;
+            transform: translateX(-50%);
+        }
+        
+        .nav-link:hover::after {
+            width: 100%;
+        }
+        
+        .dish-card {
+            background: var(--secondary-dark);
+            border: 1px solid rgba(255, 255, 255, 0.1);
+            transition: all 0.3s ease;
+            backdrop-filter: blur(10px);
+        }
+        
+        .dish-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
+            border-color: var(--accent-orange);
+        }
+        
+        .rating-stars {
+            color: var(--gold-accent);
+        }
+        
+        .fade-in {
+            opacity: 0;
+            transform: translateY(30px);
+            animation: fadeInUp 0.8s ease forwards;
+        }
+        
+        @keyframes fadeInUp {
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+        
+        .parallax {
+            transform: translateZ(0);
+            will-change: transform;
+        }
+        
+        @media (max-width: 768px) {
+            .hero-content {
+                text-align: center;
+            }
+            
+            .hero-image {
+                height: 300px;
+                margin-bottom: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation Bar -->
+    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="flex items-center justify-between h-16">
+                <!-- Logo -->
+                <div class="flex-shrink-0">
+                    <h1 class="font-display text-2xl font-bold gradient-text">LUDO'S Beco</h1>
+                </div>
+                
+                <!-- Desktop Navigation -->
+                <div class="hidden md:block">
+                    <div class="ml-10 flex items-baseline space-x-8">
+                        <a href="#home" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Home</a>
+                        <a href="#story" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Our Story</a>
+                        <a href="#menu" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Menu</a>
+                        <a href="#testimonials" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Testimonials</a>
+                        <a href="#events" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Events</a>
+                        <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">Contact Us</a>
+                    </div>
+                </div>
+                
+                <!-- Mobile menu button -->
+                <div class="md:hidden">
+                    <button id="mobile-menu-btn" class="text-white hover:text-orange-400 focus:outline-none">
+                        <i class="fas fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Mobile Navigation -->
+        <div id="mobile-menu" class="md:hidden hidden bg-black/95 backdrop-blur-md">
+            <div class="px-2 pt-2 pb-3 space-y-1">
+                <a href="#home" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Home</a>
+                <a href="#story" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Our Story</a>
+                <a href="#menu" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Menu</a>
+                <a href="#testimonials" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Testimonials</a>
+                <a href="#events" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Events</a>
+                <a href="#contact" class="block bg-red-600 hover:bg-red-700 text-white px-3 py-2 mx-3 rounded-full font-semibold text-center">Contact Us</a>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section id="home" class="min-h-screen flex items-center pt-16">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
+                <!-- Hero Image -->
+                <div class="order-2 lg:order-1 fade-in">
+                    <div class="hero-image rounded-2xl h-96 lg:h-[500px] shadow-2xl relative overflow-hidden">
+                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
+                             alt="Delicious ramen bowl with rich broth and fresh toppings" 
+                             class="w-full h-full object-cover"
+                             onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #ff6b35 0%, #ff4444 100%)';">
+                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
+                        <div class="absolute bottom-6 left-6">
+                            <div class="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2">
+                                <div class="flex items-center space-x-2">
+                                    <div class="rating-stars">
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                        <i class="fas fa-star"></i>
+                                    </div>
+                                    <span class="text-white text-sm font-medium">Signature Dish</span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Hero Content -->
+                <div class="order-1 lg:order-2 hero-content fade-in">
+                    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
+                        <span class="gradient-text">Sip, Slurp &</span><br>
+                        <span class="text-white">Savor</span><br>
+                        <span class="gradient-text">Authenticity</span>
+                    </h1>
+                    
+                    <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-lg">
+                        Your Lisbon brunch refuge in the charming Beco do Recolhimento. Fresh ingredients, friendly service, and unforgettable flavors await.
+                    </p>
+                    
+                    <div class="flex flex-col sm:flex-row gap-4">
+                        <button class="btn-primary px-8 py-4 rounded-full font-semibold text-white text-lg hover:scale-105 transition-transform">
+                            <i class="fas fa-utensils mr-2"></i>
+                            Explore Menu
+                        </button>
+                        <button class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">
+                            <i class="fas fa-calendar-alt mr-2"></i>
+                            Book Reservation
+                        </button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Featured Dishes Section -->
+    <section class="py-20 bg-gradient-to-b from-gray-900 to-black">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="text-center mb-16 fade-in">
+                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
+                    <span class="gradient-text">Signature</span> <span class="text-white">Dishes</span>
+                </h2>
+                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
+                    Discover LUDO'S most beloved creations, from legendary eggs Benedict to fresh croissants and healthy bowls
+                </p>
+            </div>
+            
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <!-- Dish Card 1 -->
+                <div class="dish-card rounded-2xl overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-6xl">🍳</div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
+                            <div class="rating-stars text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold text-white mb-2">Eggs Benedict</h3>
+                        <p class="text-gray-400 mb-4">Our legendary eggs Benedict - perfectly poached eggs with hollandaise sauce on English muffins</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold gradient-text">€14</span>
+                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
+                                Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dish Card 2 -->
+                <div class="dish-card rounded-2xl overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-amber-400 to-yellow-500 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-6xl">🥐</div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
+                            <div class="rating-stars text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star-half-alt"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold text-white mb-2">Fresh Croissants</h3>
+                        <p class="text-gray-400 mb-4">Buttery, flaky croissants baked fresh daily with premium French butter</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold gradient-text">€6</span>
+                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
+                                Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+                
+                <!-- Dish Card 3 -->
+                <div class="dish-card rounded-2xl overflow-hidden fade-in">
+                    <div class="h-48 bg-gradient-to-br from-pink-400 to-purple-500 relative">
+                        <div class="absolute inset-0 flex items-center justify-center">
+                            <div class="text-6xl">🐉</div>
+                        </div>
+                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
+                            <div class="rating-stars text-sm">
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                                <i class="fas fa-star"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="p-6">
+                        <h3 class="font-display text-xl font-semibold text-white mb-2">Dragonfruit Mocktail</h3>
+                        <p class="text-gray-400 mb-4">Refreshing dragonfruit blend - a must-try signature drink that's Instagram-worthy</p>
+                        <div class="flex items-center justify-between">
+                            <span class="text-2xl font-bold gradient-text">€8</span>
+                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
+                                Order Now
+                            </button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Contact Footer -->
+    <footer class="bg-black border-t border-white/10 py-12">
+        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+                <div>
+                    <h3 class="font-display text-2xl font-bold gradient-text mb-4">LUDO'S Beco</h3>
+                    <p class="text-gray-400 mb-4">Hidden brunch gem in Lisbon's charming Beco do Recolhimento</p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
+                            <i class="fab fa-facebook text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
+                            <i class="fab fa-instagram text-xl"></i>
+                        </a>
+                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
+                            <i class="fab fa-twitter text-xl"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
+                    <div class="space-y-2">
+                        <a href="#menu" class="block text-gray-400 hover:text-orange-400 transition-colors">Menu</a>
+                        <a href="#story" class="block text-gray-400 hover:text-orange-400 transition-colors">Our Story</a>
+                        <a href="#events" class="block text-gray-400 hover:text-orange-400 transition-colors">Events</a>
+                        <a href="#testimonials" class="block text-gray-400 hover:text-orange-400 transition-colors">Reviews</a>
+                    </div>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold text-white mb-4">Contact Info</h4>
+                    <div class="space-y-3">
+                        <div class="flex items-center">
+                            <i class="fas fa-envelope text-orange-400 mr-3"></i>
+                            <a href="mailto:hello@ludosbeco.com" class="text-gray-400 hover:text-orange-400 transition-colors">
+                                hello@ludosbeco.com
+                            </a>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-phone text-orange-400 mr-3"></i>
+                            <span class="text-gray-400">+351 123 456 789</span>
+                        </div>
+                        <div class="flex items-center">
+                            <i class="fas fa-map-marker-alt text-orange-400 mr-3"></i>
+                            <span class="text-gray-400">Beco do Recolhimento, near Castelo, Lisbon</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            
+            <div class="border-t border-white/10 mt-8 pt-8 text-center">
+                <p class="text-gray-400">© 2024 LUDO'S Beco. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Mobile menu toggle
+        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
+        const mobileMenu = document.getElementById('mobile-menu');
+        
+        mobileMenuBtn.addEventListener('click', () => {
+            mobileMenu.classList.toggle('hidden');
+        });
+
+        // Smooth scrolling for navigation links
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Fade in animation on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = Math.random() * 0.3 + 's';
+                    entry.target.classList.add('fade-in');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('.fade-in').forEach(el => {
+            observer.observe(el);
+        });
+
+        // Parallax effect for hero section
+        window.addEventListener('scroll', () => {
+            const scrolled = window.pageYOffset;
+            const parallaxElements = document.querySelectorAll('.parallax');
+            
+            parallaxElements.forEach(element => {
+                const speed = 0.5;
+                element.style.transform = `translateY(${scrolled * speed}px)`;
+            });
+        });
+
+        // Button click animations
+        document.querySelectorAll('button').forEach(button => {
+            button.addEventListener('click', function(e) {
+                // Create ripple effect
+                const ripple = document.createElement('span');
+                const rect = this.getBoundingClientRect();
+                const size = Math.max(rect.width, rect.height);
+                const x = e.clientX - rect.left - size / 2;
+                const y = e.clientY - rect.top - size / 2;
+                
+                ripple.style.width = ripple.style.height = size + 'px';
+                ripple.style.left = x + 'px';
+                ripple.style.top = y + 'px';
+                ripple.classList.add('ripple');
+                
+                this.appendChild(ripple);
+                
+                setTimeout(() => {
+                    ripple.remove();
+                }, 600);
+            });
+        });
+
+        // Add ripple effect styles
+        const style = document.createElement('style');
+        style.textContent = `
+            button {
+                position: relative;
+                overflow: hidden;
+            }
+            
+            .ripple {
+                position: absolute;
+                border-radius: 50%;
+                background: rgba(255, 255, 255, 0.3);
+                transform: scale(0);
+                animation: ripple-animation 0.6s linear;
+                pointer-events: none;
+            }
+            
+            @keyframes ripple-animation {
+                to {
+                    transform: scale(4);
+                    opacity: 0;
+                }
+            }
+        `;
+        document.head.appendChild(style);
+    </script>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972a6c59260884fe',t:'MTc1NTc4MjM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+</html>
