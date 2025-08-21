@@ -3,416 +3,617 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>LUDO'S Beco - Hidden Brunch Gem in Lisbon</title>
+    <title>LUDO'S - Hidden Brunch Gem in Lisbon's Alfama</title>
     <script src="https://cdn.tailwindcss.com"></script>
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
     <style>
-        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600;700&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:wght@400;600;700&family=Inter:wght@300;400;500;600&display=swap');
         
         :root {
-            --primary-dark: #1a1a1a;
-            --secondary-dark: #2d2d2d;
-            --accent-red: #ff4444;
-            --accent-orange: #ff6b35;
-            --text-white: #ffffff;
-            --text-gray: #b0b0b0;
-            --gold-accent: #ffd700;
+            --primary-bg: #faf8f5;
+            --secondary-bg: #ffffff;
+            --accent-color: #d4a574;
+            --text-primary: #2d2d2d;
+            --text-secondary: #6b7280;
+            --shadow-light: rgba(212, 165, 116, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.1);
+        }
+        
+        [data-theme="dark"] {
+            --primary-bg: #1a1a1a;
+            --secondary-bg: #2d2d2d;
+            --accent-color: #f4d03f;
+            --text-primary: #f8f9fa;
+            --text-secondary: #d1d5db;
+            --shadow-light: rgba(244, 208, 63, 0.1);
+            --shadow-dark: rgba(0, 0, 0, 0.3);
         }
         
         * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
+            transition: all 0.3s ease;
         }
         
         body {
             font-family: 'Inter', sans-serif;
-            background-color: var(--primary-dark);
-            color: var(--text-white);
-            overflow-x: hidden;
+            background-color: var(--primary-bg);
+            color: var(--text-primary);
         }
         
         .font-display {
             font-family: 'Playfair Display', serif;
         }
         
-        .hero-image {
-            background: linear-gradient(135deg, rgba(255, 107, 53, 0.1) 0%, rgba(255, 68, 68, 0.1) 100%),
-                        url('https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D');
-            background-size: cover;
-            background-position: center;
-            background-repeat: no-repeat;
+        .pill-nav {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(20px);
+            border: 1px solid rgba(255, 255, 255, 0.2);
+            box-shadow: 0 8px 32px var(--shadow-dark);
         }
         
-        .gradient-text {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
+        .neumorphic {
+            background: var(--secondary-bg);
+            box-shadow: 
+                8px 8px 16px var(--shadow-dark),
+                -8px -8px 16px var(--shadow-light);
+            border-radius: 20px;
         }
         
-        .btn-primary {
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
-            transition: all 0.3s ease;
-            box-shadow: 0 4px 15px rgba(255, 107, 53, 0.3);
+        .neumorphic-inset {
+            background: var(--secondary-bg);
+            box-shadow: 
+                inset 4px 4px 8px var(--shadow-dark),
+                inset -4px -4px 8px var(--shadow-light);
+            border-radius: 15px;
         }
         
-        .btn-primary:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 107, 53, 0.4);
+        .hero-gradient {
+            background: linear-gradient(135deg, var(--primary-bg) 0%, var(--accent-color) 100%);
         }
         
-        .btn-secondary {
-            border: 2px solid var(--accent-red);
-            color: var(--text-white);
-            transition: all 0.3s ease;
-        }
-        
-        .btn-secondary:hover {
-            background-color: var(--accent-red);
-            transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(255, 68, 68, 0.3);
-        }
-        
-        .nav-link {
-            position: relative;
-            transition: all 0.3s ease;
-        }
-        
-        .nav-link:hover {
-            color: var(--accent-orange);
-        }
-        
-        .nav-link::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -5px;
-            left: 50%;
-            background: linear-gradient(135deg, var(--accent-orange) 0%, var(--accent-red) 100%);
-            transition: all 0.3s ease;
-            transform: translateX(-50%);
-        }
-        
-        .nav-link:hover::after {
-            width: 100%;
-        }
-        
-        .dish-card {
-            background: var(--secondary-dark);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            transition: all 0.3s ease;
-            backdrop-filter: blur(10px);
-        }
-        
-        .dish-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 10px 30px rgba(255, 107, 53, 0.2);
-            border-color: var(--accent-orange);
-        }
-        
-        .rating-stars {
-            color: var(--gold-accent);
-        }
-        
-        .fade-in {
+        .animate-fade-in {
+            animation: fadeIn 0.8s ease-out forwards;
             opacity: 0;
             transform: translateY(30px);
-            animation: fadeInUp 0.8s ease forwards;
         }
         
-        @keyframes fadeInUp {
+        .animate-slide-in {
+            animation: slideIn 0.6s ease-out forwards;
+            opacity: 0;
+            transform: translateX(-30px);
+        }
+        
+        @keyframes fadeIn {
             to {
                 opacity: 1;
                 transform: translateY(0);
             }
         }
         
-        .parallax {
-            transform: translateZ(0);
-            will-change: transform;
+        @keyframes slideIn {
+            to {
+                opacity: 1;
+                transform: translateX(0);
+            }
         }
         
-        @media (max-width: 768px) {
-            .hero-content {
-                text-align: center;
-            }
-            
-            .hero-image {
-                height: 300px;
-                margin-bottom: 2rem;
-            }
+        .parallax {
+            transform: translateY(var(--scroll-y, 0));
+        }
+        
+        .hover-glow:hover {
+            box-shadow: 0 0 30px var(--accent-color);
+            transform: translateY(-2px);
+        }
+        
+        .visitor-counter {
+            background: linear-gradient(45deg, var(--accent-color), #e8b86d);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+        }
+        
+        .social-icon {
+            transition: all 0.3s ease;
+        }
+        
+        .social-icon:hover {
+            transform: scale(1.1) rotate(5deg);
+        }
+        
+        .menu-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 20px 40px var(--shadow-dark);
+        }
+        
+        .toggle-switch {
+            width: 60px;
+            height: 30px;
+            background: var(--secondary-bg);
+            border-radius: 15px;
+            position: relative;
+            cursor: pointer;
+            box-shadow: inset 2px 2px 4px var(--shadow-dark);
+        }
+        
+        .toggle-switch::after {
+            content: '';
+            position: absolute;
+            width: 26px;
+            height: 26px;
+            border-radius: 50%;
+            background: var(--accent-color);
+            top: 2px;
+            left: 2px;
+            transition: all 0.3s ease;
+            box-shadow: 2px 2px 4px var(--shadow-dark);
+        }
+        
+        .toggle-switch.active::after {
+            left: 32px;
         }
     </style>
 </head>
 <body>
-    <!-- Navigation Bar -->
-    <nav class="fixed top-0 left-0 right-0 z-50 bg-black/90 backdrop-blur-md border-b border-white/10">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="flex items-center justify-between h-16">
-                <!-- Logo -->
-                <div class="flex-shrink-0">
-                    <h1 class="font-display text-2xl font-bold gradient-text">LUDO'S Beco</h1>
-                </div>
-                
-                <!-- Desktop Navigation -->
-                <div class="hidden md:block">
-                    <div class="ml-10 flex items-baseline space-x-8">
-                        <a href="#home" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Home</a>
-                        <a href="#story" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Our Story</a>
-                        <a href="#menu" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Menu</a>
-                        <a href="#testimonials" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Testimonials</a>
-                        <a href="#events" class="nav-link text-white hover:text-orange-400 px-3 py-2 text-sm font-medium">Events</a>
-                        <a href="#contact" class="bg-red-600 hover:bg-red-700 text-white px-6 py-2 rounded-full font-semibold transition-all duration-300 hover:shadow-lg">Contact Us</a>
-                    </div>
-                </div>
-                
-                <!-- Mobile menu button -->
-                <div class="md:hidden">
-                    <button id="mobile-menu-btn" class="text-white hover:text-orange-400 focus:outline-none">
-                        <i class="fas fa-bars text-xl"></i>
-                    </button>
-                </div>
+    <!-- Floating Pill Navigation -->
+    <nav class="fixed top-6 left-1/2 transform -translate-x-1/2 z-50 pill-nav rounded-full px-6 py-3">
+        <div class="flex items-center space-x-6">
+            <a href="#home" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
+                <i class="fas fa-home mr-1"></i>
+                <span data-en="Home" data-es="Inicio">Home</span>
+            </a>
+            <a href="#menu" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
+                <i class="fas fa-utensils mr-1"></i>
+                <span data-en="Menu" data-es="Menú">Menu</span>
+            </a>
+            <a href="#reservations" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
+                <i class="fas fa-calendar mr-1"></i>
+                <span data-en="Reserve" data-es="Reservar">Reserve</span>
+            </a>
+            <a href="#reviews" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
+                <i class="fas fa-star mr-1"></i>
+                <span data-en="Reviews" data-es="Reseñas">Reviews</span>
+            </a>
+            <a href="#location" class="nav-link text-sm font-medium hover:text-yellow-400 transition-colors">
+                <i class="fas fa-map-marker-alt mr-1"></i>
+                <span data-en="Location" data-es="Ubicación">Location</span>
+            </a>
+            
+            <!-- Language Toggle -->
+            <div class="flex items-center space-x-2">
+                <span class="text-xs">EN</span>
+                <div class="toggle-switch" id="langToggle"></div>
+                <span class="text-xs">ES</span>
             </div>
-        </div>
-        
-        <!-- Mobile Navigation -->
-        <div id="mobile-menu" class="md:hidden hidden bg-black/95 backdrop-blur-md">
-            <div class="px-2 pt-2 pb-3 space-y-1">
-                <a href="#home" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Home</a>
-                <a href="#story" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Our Story</a>
-                <a href="#menu" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Menu</a>
-                <a href="#testimonials" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Testimonials</a>
-                <a href="#events" class="block text-white hover:text-orange-400 px-3 py-2 text-base font-medium">Events</a>
-                <a href="#contact" class="block bg-red-600 hover:bg-red-700 text-white px-3 py-2 mx-3 rounded-full font-semibold text-center">Contact Us</a>
+            
+            <!-- Theme Toggle -->
+            <div class="flex items-center space-x-2">
+                <i class="fas fa-sun text-xs"></i>
+                <div class="toggle-switch" id="themeToggle"></div>
+                <i class="fas fa-moon text-xs"></i>
             </div>
         </div>
     </nav>
 
     <!-- Hero Section -->
-    <section id="home" class="min-h-screen flex items-center pt-16">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-                <!-- Hero Image -->
-                <div class="order-2 lg:order-1 fade-in">
-                    <div class="hero-image rounded-2xl h-96 lg:h-[500px] shadow-2xl relative overflow-hidden">
-                        <img src="https://images.unsplash.com/photo-1569718212165-3a8278d5f624?q=80&w=464&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D" 
-                             alt="Delicious ramen bowl with rich broth and fresh toppings" 
-                             class="w-full h-full object-cover"
-                             onerror="this.style.display='none'; this.parentElement.style.background='linear-gradient(135deg, #ff6b35 0%, #ff4444 100%)';">
-                        <div class="absolute inset-0 bg-gradient-to-t from-black/50 to-transparent"></div>
-                        <div class="absolute bottom-6 left-6">
-                            <div class="bg-black/70 backdrop-blur-sm rounded-lg px-4 py-2">
-                                <div class="flex items-center space-x-2">
-                                    <div class="rating-stars">
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                        <i class="fas fa-star"></i>
-                                    </div>
-                                    <span class="text-white text-sm font-medium">Signature Dish</span>
-                                </div>
+    <section id="home" class="min-h-screen hero-gradient flex items-center justify-center relative overflow-hidden">
+        <div class="absolute inset-0 opacity-10">
+            <svg viewBox="0 0 100 100" class="w-full h-full">
+                <defs>
+                    <pattern id="tiles" x="0" y="0" width="20" height="20" patternUnits="userSpaceOnUse">
+                        <rect width="20" height="20" fill="none" stroke="currentColor" stroke-width="0.5"/>
+                        <circle cx="10" cy="10" r="3" fill="currentColor" opacity="0.3"/>
+                    </pattern>
+                </defs>
+                <rect width="100%" height="100%" fill="url(#tiles)"/>
+            </svg>
+        </div>
+        
+        <div class="container mx-auto px-6 text-center relative z-10">
+            <div class="animate-fade-in">
+                <h1 class="font-display text-6xl md:text-8xl font-bold mb-6 parallax">
+                    LUDO'S
+                </h1>
+                <p class="text-xl md:text-2xl mb-8 max-w-2xl mx-auto font-light" data-en="Your Lisbon brunch refuge—fresh, friendly, unforgettable." data-es="Tu refugio de brunch en Lisboa—fresco, amigable, inolvidable.">
+                    Your Lisbon brunch refuge—fresh, friendly, unforgettable.
+                </p>
+                
+                <div class="flex flex-col sm:flex-row gap-4 justify-center items-center">
+                    <button class="neumorphic px-8 py-4 font-semibold hover-glow transition-all duration-300" data-en="View Menu" data-es="Ver Menú">
+                        View Menu
+                    </button>
+                    <button class="neumorphic px-8 py-4 font-semibold hover-glow transition-all duration-300" data-en="Reserve a Table" data-es="Reservar Mesa">
+                        Reserve a Table
+                    </button>
+                </div>
+            </div>
+        </div>
+        
+        <!-- Floating Elements -->
+        <div class="absolute top-20 left-10 animate-bounce">
+            <div class="w-4 h-4 bg-yellow-400 rounded-full opacity-60"></div>
+        </div>
+        <div class="absolute bottom-32 right-16 animate-pulse">
+            <div class="w-6 h-6 bg-orange-300 rounded-full opacity-40"></div>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <div class="neumorphic p-12 animate-slide-in">
+                <h2 class="font-display text-4xl font-bold text-center mb-8" data-en="Hidden Gem in Alfama" data-es="Joya Escondida en Alfama">
+                    Hidden Gem in Alfama
+                </h2>
+                <p class="text-lg leading-relaxed text-center" data-en="Nestled in the charming cobblestone streets near Castelo, LUDO'S offers a cozy escape from the bustling city. Our intimate brunch spot combines friendly Portuguese hospitality with fresh, locally-sourced ingredients, creating an unforgettable dining experience in one of Lisbon's most authentic neighborhoods." data-es="Ubicado en las encantadoras calles empedradas cerca del Castelo, LUDO'S ofrece un escape acogedor del bullicio de la ciudad. Nuestro íntimo lugar de brunch combina la hospitalidad portuguesa amigable con ingredientes frescos de origen local, creando una experiencia gastronómica inolvidable en uno de los barrios más auténticos de Lisboa.">
+                    Nestled in the charming cobblestone streets near Castelo, LUDO'S offers a cozy escape from the bustling city. Our intimate brunch spot combines friendly Portuguese hospitality with fresh, locally-sourced ingredients, creating an unforgettable dining experience in one of Lisbon's most authentic neighborhoods.
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Showcase -->
+    <section id="menu" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="font-display text-5xl font-bold text-center mb-16" data-en="Signature Dishes" data-es="Platos Especiales">
+                Signature Dishes
+            </h2>
+            
+            <div class="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">🍳</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Legendary Eggs Benedict" data-es="Huevos Benedict Legendarios">
+                        Legendary Eggs Benedict
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Perfectly poached eggs on artisan bread with our signature hollandaise" data-es="Huevos pochados perfectos en pan artesanal con nuestra salsa holandesa especial">
+                        Perfectly poached eggs on artisan bread with our signature hollandaise
+                    </p>
+                </div>
+                
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">🥗</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Halloumi Garden Plate" data-es="Plato de Halloumi del Jardín">
+                        Halloumi Garden Plate
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Grilled halloumi with fresh seasonal vegetables and herbs" data-es="Halloumi a la parrilla con verduras frescas de temporada y hierbas">
+                        Grilled halloumi with fresh seasonal vegetables and herbs
+                    </p>
+                </div>
+                
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">🐲</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Dragonfruit Mocktail" data-es="Mocktail de Pitaya">
+                        Dragonfruit Mocktail
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Refreshing blend of exotic dragonfruit with mint and lime" data-es="Mezcla refrescante de pitaya exótica con menta y lima">
+                        Refreshing blend of exotic dragonfruit with mint and lime
+                    </p>
+                </div>
+                
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">🥐</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Artisan Croissants" data-es="Croissants Artesanales">
+                        Artisan Croissants
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Buttery, flaky pastries baked fresh daily" data-es="Pasteles mantecosos y hojaldrados horneados frescos diariamente">
+                        Buttery, flaky pastries baked fresh daily
+                    </p>
+                </div>
+                
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">☕</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Portuguese Latte" data-es="Latte Portugués">
+                        Portuguese Latte
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Rich espresso with steamed milk and a touch of cinnamon" data-es="Espresso rico con leche vaporizada y un toque de canela">
+                        Rich espresso with steamed milk and a touch of cinnamon
+                    </p>
+                </div>
+                
+                <div class="neumorphic p-6 menu-card transition-all duration-300">
+                    <div class="text-4xl mb-4">🥣</div>
+                    <h3 class="font-display text-xl font-semibold mb-2" data-en="Healthy Bowl" data-es="Bowl Saludable">
+                        Healthy Bowl
+                    </h3>
+                    <p class="text-sm opacity-80" data-en="Quinoa, fresh fruits, nuts, and honey drizzle" data-es="Quinoa, frutas frescas, nueces y miel">
+                        Quinoa, fresh fruits, nuts, and honey drizzle
+                    </p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Carousel -->
+    <section id="reviews" class="py-20 px-6">
+        <div class="container mx-auto max-w-4xl">
+            <h2 class="font-display text-5xl font-bold text-center mb-16" data-en="What Our Guests Say" data-es="Lo Que Dicen Nuestros Huéspedes">
+                What Our Guests Say
+            </h2>
+            
+            <div class="neumorphic p-8 relative overflow-hidden">
+                <div class="reviews-slider">
+                    <div class="review-slide active text-center">
+                        <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                        <p class="text-xl font-light mb-4 italic" data-en="Best eggs Benedict I've ever had. The atmosphere is so cozy and welcoming!" data-es="¡Los mejores huevos Benedict que he probado! ¡El ambiente es muy acogedor y acogedor!">
+                            "Best eggs Benedict I've ever had. The atmosphere is so cozy and welcoming!"
+                        </p>
+                        <p class="font-semibold">- Sarah M.</p>
+                    </div>
+                    
+                    <div class="review-slide text-center">
+                        <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                        <p class="text-xl font-light mb-4 italic" data-en="Hidden gem... dragonfruit cocktail is a must-try. Perfect spot for a peaceful brunch!" data-es="Joya escondida... el cóctel de pitaya es imprescindible. ¡Lugar perfecto para un brunch tranquilo!">
+                            "Hidden gem... dragonfruit cocktail is a must-try. Perfect spot for a peaceful brunch!"
+                        </p>
+                        <p class="font-semibold">- Miguel R.</p>
+                    </div>
+                    
+                    <div class="review-slide text-center">
+                        <div class="text-6xl mb-4">⭐⭐⭐⭐⭐</div>
+                        <p class="text-xl font-light mb-4 italic" data-en="Incredible fresh ingredients and the friendliest staff. A true Alfama treasure!" data-es="Ingredientes frescos increíbles y el personal más amable. ¡Un verdadero tesoro de Alfama!">
+                            "Incredible fresh ingredients and the friendliest staff. A true Alfama treasure!"
+                        </p>
+                        <p class="font-semibold">- Emma L.</p>
+                    </div>
+                </div>
+                
+                <div class="flex justify-center mt-6 space-x-2">
+                    <button class="review-dot w-3 h-3 rounded-full bg-gray-400 active" data-slide="0"></button>
+                    <button class="review-dot w-3 h-3 rounded-full bg-gray-400" data-slide="1"></button>
+                    <button class="review-dot w-3 h-3 rounded-full bg-gray-400" data-slide="2"></button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservations -->
+    <section id="reservations" class="py-20 px-6">
+        <div class="container mx-auto max-w-2xl">
+            <h2 class="font-display text-5xl font-bold text-center mb-16" data-en="Reserve Your Table" data-es="Reserva Tu Mesa">
+                Reserve Your Table
+            </h2>
+            
+            <div class="neumorphic p-8">
+                <form class="space-y-6">
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-en="Name" data-es="Nombre">Name</label>
+                            <input type="text" class="neumorphic-inset w-full p-3 bg-transparent border-0 outline-none" placeholder="Your name">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-en="Email" data-es="Correo">Email</label>
+                            <input type="email" class="neumorphic-inset w-full p-3 bg-transparent border-0 outline-none" placeholder="your@email.com">
+                        </div>
+                    </div>
+                    
+                    <div class="grid md:grid-cols-2 gap-4">
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-en="Date" data-es="Fecha">Date</label>
+                            <input type="date" class="neumorphic-inset w-full p-3 bg-transparent border-0 outline-none">
+                        </div>
+                        <div>
+                            <label class="block text-sm font-medium mb-2" data-en="Time" data-es="Hora">Time</label>
+                            <select class="neumorphic-inset w-full p-3 bg-transparent border-0 outline-none">
+                                <option>9:00 AM</option>
+                                <option>10:00 AM</option>
+                                <option>11:00 AM</option>
+                                <option>12:00 PM</option>
+                                <option>1:00 PM</option>
+                                <option>2:00 PM</option>
+                                <option>3:00 PM</option>
+                                <option>4:00 PM</option>
+                            </select>
+                        </div>
+                    </div>
+                    
+                    <div>
+                        <label class="block text-sm font-medium mb-2" data-en="Party Size" data-es="Número de Personas">Party Size</label>
+                        <select class="neumorphic-inset w-full p-3 bg-transparent border-0 outline-none">
+                            <option>1 person</option>
+                            <option>2 people</option>
+                            <option>3 people</option>
+                            <option>4 people</option>
+                            <option>5+ people</option>
+                        </select>
+                    </div>
+                    
+                    <button type="submit" class="neumorphic w-full py-4 font-semibold hover-glow transition-all duration-300" data-en="Reserve Now" data-es="Reservar Ahora">
+                        Reserve Now
+                    </button>
+                </form>
+            </div>
+        </div>
+    </section>
+
+    <!-- Location & Map -->
+    <section id="location" class="py-20 px-6">
+        <div class="container mx-auto">
+            <h2 class="font-display text-5xl font-bold text-center mb-16" data-en="Find Us" data-es="Encuéntranos">
+                Find Us
+            </h2>
+            
+            <div class="grid lg:grid-cols-2 gap-12 items-center">
+                <div class="neumorphic p-8">
+                    <h3 class="font-display text-2xl font-semibold mb-6" data-en="Visit Information" data-es="Información de Visita">
+                        Visit Information
+                    </h3>
+                    
+                    <div class="space-y-4">
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-map-marker-alt text-yellow-500 mt-1"></i>
+                            <div>
+                                <p class="font-medium" data-en="Address" data-es="Dirección">Address</p>
+                                <p class="text-sm opacity-80">Beco do Recolhimento<br>Near Castelo, Alfama<br>Lisbon, Portugal</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-clock text-yellow-500 mt-1"></i>
+                            <div>
+                                <p class="font-medium" data-en="Hours" data-es="Horarios">Hours</p>
+                                <p class="text-sm opacity-80" data-en="Daily: 9:00 AM - 5:00 PM" data-es="Diario: 9:00 AM - 5:00 PM">Daily: 9:00 AM - 5:00 PM</p>
+                            </div>
+                        </div>
+                        
+                        <div class="flex items-start space-x-3">
+                            <i class="fas fa-phone text-yellow-500 mt-1"></i>
+                            <div>
+                                <p class="font-medium" data-en="Phone" data-es="Teléfono">Phone</p>
+                                <p class="text-sm opacity-80">+351 21 XXX XXXX</p>
                             </div>
                         </div>
                     </div>
                 </div>
                 
-                <!-- Hero Content -->
-                <div class="order-1 lg:order-2 hero-content fade-in">
-                    <h1 class="font-display text-4xl md:text-6xl lg:text-7xl font-bold leading-tight mb-6">
-                        <span class="gradient-text">Sip, Slurp &</span><br>
-                        <span class="text-white">Savor</span><br>
-                        <span class="gradient-text">Authenticity</span>
-                    </h1>
-                    
-                    <p class="text-xl text-gray-300 mb-8 leading-relaxed max-w-lg">
-                        Your Lisbon brunch refuge in the charming Beco do Recolhimento. Fresh ingredients, friendly service, and unforgettable flavors await.
-                    </p>
-                    
-                    <div class="flex flex-col sm:flex-row gap-4">
-                        <button class="btn-primary px-8 py-4 rounded-full font-semibold text-white text-lg hover:scale-105 transition-transform">
-                            <i class="fas fa-utensils mr-2"></i>
-                            Explore Menu
-                        </button>
-                        <button class="btn-secondary px-8 py-4 rounded-full font-semibold text-lg hover:scale-105 transition-transform">
-                            <i class="fas fa-calendar-alt mr-2"></i>
-                            Book Reservation
-                        </button>
+                <div class="neumorphic p-4 h-96">
+                    <div class="w-full h-full bg-gradient-to-br from-green-200 to-blue-200 rounded-lg flex items-center justify-center">
+                        <div class="text-center">
+                            <i class="fas fa-map-marked-alt text-4xl text-gray-600 mb-4"></i>
+                            <p class="text-gray-600 font-medium" data-en="Interactive Map" data-es="Mapa Interactivo">Interactive Map</p>
+                            <p class="text-sm text-gray-500 mt-2" data-en="Beco do Recolhimento, Alfama" data-es="Beco do Recolhimento, Alfama">Beco do Recolhimento, Alfama</p>
+                        </div>
                     </div>
                 </div>
             </div>
         </div>
     </section>
 
-    <!-- Featured Dishes Section -->
-    <section class="py-20 bg-gradient-to-b from-gray-900 to-black">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="text-center mb-16 fade-in">
-                <h2 class="font-display text-4xl md:text-5xl font-bold mb-4">
-                    <span class="gradient-text">Signature</span> <span class="text-white">Dishes</span>
-                </h2>
-                <p class="text-xl text-gray-300 max-w-2xl mx-auto">
-                    Discover LUDO'S most beloved creations, from legendary eggs Benedict to fresh croissants and healthy bowls
+    <!-- Social Media -->
+    <section class="py-20 px-6">
+        <div class="container mx-auto text-center">
+            <h2 class="font-display text-5xl font-bold mb-16" data-en="Follow Our Journey" data-es="Sigue Nuestro Viaje">
+                Follow Our Journey
+            </h2>
+            
+            <div class="flex justify-center space-x-8 mb-12">
+                <a href="#" class="neumorphic p-6 social-icon">
+                    <i class="fab fa-instagram text-3xl text-pink-500"></i>
+                </a>
+                <a href="#" class="neumorphic p-6 social-icon">
+                    <i class="fab fa-facebook text-3xl text-blue-500"></i>
+                </a>
+                <a href="#" class="neumorphic p-6 social-icon">
+                    <i class="fab fa-tiktok text-3xl text-black"></i>
+                </a>
+            </div>
+            
+            <div class="grid grid-cols-2 md:grid-cols-4 gap-4">
+                <div class="neumorphic p-4 aspect-square flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🍳</div>
+                        <p class="text-xs">Fresh Brunch</p>
+                    </div>
+                </div>
+                <div class="neumorphic p-4 aspect-square flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">☕</div>
+                        <p class="text-xs">Perfect Coffee</p>
+                    </div>
+                </div>
+                <div class="neumorphic p-4 aspect-square flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">🏰</div>
+                        <p class="text-xs">Alfama Views</p>
+                    </div>
+                </div>
+                <div class="neumorphic p-4 aspect-square flex items-center justify-center">
+                    <div class="text-center">
+                        <div class="text-3xl mb-2">😊</div>
+                        <p class="text-xs">Happy Guests</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer class="py-12 px-6 border-t border-opacity-20">
+        <div class="container mx-auto">
+            <div class="text-center mb-8">
+                <p class="text-2xl font-semibold visitor-counter" data-en="You are visitor number" data-es="Eres el visitante número">
+                    You are visitor number <span id="visitorCount">1,247</span>
                 </p>
             </div>
             
-            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-                <!-- Dish Card 1 -->
-                <div class="dish-card rounded-2xl overflow-hidden fade-in">
-                    <div class="h-48 bg-gradient-to-br from-yellow-400 to-orange-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-6xl">🍳</div>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
-                            <div class="rating-stars text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Eggs Benedict</h3>
-                        <p class="text-gray-400 mb-4">Our legendary eggs Benedict - perfectly poached eggs with hollandaise sauce on English muffins</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold gradient-text">€14</span>
-                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                                Order Now
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dish Card 2 -->
-                <div class="dish-card rounded-2xl overflow-hidden fade-in">
-                    <div class="h-48 bg-gradient-to-br from-amber-400 to-yellow-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-6xl">🥐</div>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
-                            <div class="rating-stars text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star-half-alt"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Fresh Croissants</h3>
-                        <p class="text-gray-400 mb-4">Buttery, flaky croissants baked fresh daily with premium French butter</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold gradient-text">€6</span>
-                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                                Order Now
-                            </button>
-                        </div>
-                    </div>
-                </div>
-                
-                <!-- Dish Card 3 -->
-                <div class="dish-card rounded-2xl overflow-hidden fade-in">
-                    <div class="h-48 bg-gradient-to-br from-pink-400 to-purple-500 relative">
-                        <div class="absolute inset-0 flex items-center justify-center">
-                            <div class="text-6xl">🐉</div>
-                        </div>
-                        <div class="absolute top-4 right-4 bg-black/70 backdrop-blur-sm rounded-full px-3 py-1">
-                            <div class="rating-stars text-sm">
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                                <i class="fas fa-star"></i>
-                            </div>
-                        </div>
-                    </div>
-                    <div class="p-6">
-                        <h3 class="font-display text-xl font-semibold text-white mb-2">Dragonfruit Mocktail</h3>
-                        <p class="text-gray-400 mb-4">Refreshing dragonfruit blend - a must-try signature drink that's Instagram-worthy</p>
-                        <div class="flex items-center justify-between">
-                            <span class="text-2xl font-bold gradient-text">€8</span>
-                            <button class="bg-orange-500 hover:bg-orange-600 text-white px-4 py-2 rounded-full text-sm font-medium transition-colors">
-                                Order Now
-                            </button>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-    </section>
-
-    <!-- Contact Footer -->
-    <footer class="bg-black border-t border-white/10 py-12">
-        <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-            <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+            <div class="grid md:grid-cols-3 gap-8 text-center md:text-left">
                 <div>
-                    <h3 class="font-display text-2xl font-bold gradient-text mb-4">LUDO'S Beco</h3>
-                    <p class="text-gray-400 mb-4">Hidden brunch gem in Lisbon's charming Beco do Recolhimento</p>
-                    <div class="flex space-x-4">
-                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
-                            <i class="fab fa-facebook text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
-                            <i class="fab fa-instagram text-xl"></i>
-                        </a>
-                        <a href="#" class="text-gray-400 hover:text-orange-400 transition-colors">
-                            <i class="fab fa-twitter text-xl"></i>
-                        </a>
+                    <h3 class="font-display text-xl font-semibold mb-4">LUDO'S</h3>
+                    <p class="text-sm opacity-80" data-en="Hidden brunch gem in Lisbon's historic Alfama district" data-es="Joya escondida de brunch en el histórico barrio de Alfama de Lisboa">
+                        Hidden brunch gem in Lisbon's historic Alfama district
+                    </p>
+                </div>
+                
+                <div>
+                    <h4 class="font-semibold mb-4" data-en="Quick Links" data-es="Enlaces Rápidos">Quick Links</h4>
+                    <div class="space-y-2 text-sm">
+                        <a href="#menu" class="block hover:text-yellow-400 transition-colors" data-en="Menu" data-es="Menú">Menu</a>
+                        <a href="#reservations" class="block hover:text-yellow-400 transition-colors" data-en="Reservations" data-es="Reservas">Reservations</a>
+                        <a href="#location" class="block hover:text-yellow-400 transition-colors" data-en="Location" data-es="Ubicación">Location</a>
                     </div>
                 </div>
                 
                 <div>
-                    <h4 class="font-semibold text-white mb-4">Quick Links</h4>
-                    <div class="space-y-2">
-                        <a href="#menu" class="block text-gray-400 hover:text-orange-400 transition-colors">Menu</a>
-                        <a href="#story" class="block text-gray-400 hover:text-orange-400 transition-colors">Our Story</a>
-                        <a href="#events" class="block text-gray-400 hover:text-orange-400 transition-colors">Events</a>
-                        <a href="#testimonials" class="block text-gray-400 hover:text-orange-400 transition-colors">Reviews</a>
-                    </div>
-                </div>
-                
-                <div>
-                    <h4 class="font-semibold text-white mb-4">Contact Info</h4>
-                    <div class="space-y-3">
-                        <div class="flex items-center">
-                            <i class="fas fa-envelope text-orange-400 mr-3"></i>
-                            <a href="mailto:hello@ludosbeco.com" class="text-gray-400 hover:text-orange-400 transition-colors">
-                                hello@ludosbeco.com
-                            </a>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-phone text-orange-400 mr-3"></i>
-                            <span class="text-gray-400">+351 123 456 789</span>
-                        </div>
-                        <div class="flex items-center">
-                            <i class="fas fa-map-marker-alt text-orange-400 mr-3"></i>
-                            <span class="text-gray-400">Beco do Recolhimento, near Castelo, Lisbon</span>
-                        </div>
+                    <h4 class="font-semibold mb-4" data-en="Contact" data-es="Contacto">Contact</h4>
+                    <div class="space-y-2 text-sm">
+                        <p>Beco do Recolhimento, Alfama</p>
+                        <p data-en="Daily: 9:00 AM - 5:00 PM" data-es="Diario: 9:00 AM - 5:00 PM">Daily: 9:00 AM - 5:00 PM</p>
+                        <p>+351 21 XXX XXXX</p>
                     </div>
                 </div>
             </div>
             
-            <div class="border-t border-white/10 mt-8 pt-8 text-center">
-                <p class="text-gray-400">© 2024 LUDO'S Beco. All rights reserved.</p>
+            <div class="text-center mt-8 pt-8 border-t border-opacity-20">
+                <p class="text-sm opacity-60">© 2024 LUDO'S. All rights reserved.</p>
             </div>
         </div>
     </footer>
 
     <script>
-        // Mobile menu toggle
-        const mobileMenuBtn = document.getElementById('mobile-menu-btn');
-        const mobileMenu = document.getElementById('mobile-menu');
+        // Theme Toggle
+        const themeToggle = document.getElementById('themeToggle');
+        const body = document.body;
         
-        mobileMenuBtn.addEventListener('click', () => {
-            mobileMenu.classList.toggle('hidden');
+        themeToggle.addEventListener('click', () => {
+            themeToggle.classList.toggle('active');
+            if (body.getAttribute('data-theme') === 'dark') {
+                body.removeAttribute('data-theme');
+                localStorage.setItem('theme', 'light');
+            } else {
+                body.setAttribute('data-theme', 'dark');
+                localStorage.setItem('theme', 'dark');
+            }
         });
-
-        // Smooth scrolling for navigation links
+        
+        // Load saved theme
+        if (localStorage.getItem('theme') === 'dark') {
+            body.setAttribute('data-theme', 'dark');
+            themeToggle.classList.add('active');
+        }
+        
+        // Language Toggle
+        const langToggle = document.getElementById('langToggle');
+        let currentLang = 'en';
+        
+        langToggle.addEventListener('click', () => {
+            langToggle.classList.toggle('active');
+            currentLang = currentLang === 'en' ? 'es' : 'en';
+            
+            document.querySelectorAll('[data-en]').forEach(element => {
+                element.textContent = element.getAttribute(`data-${currentLang}`);
+            });
+            
+            localStorage.setItem('language', currentLang);
+        });
+        
+        // Load saved language
+        if (localStorage.getItem('language') === 'es') {
+            langToggle.classList.add('active');
+            currentLang = 'es';
+            document.querySelectorAll('[data-en]').forEach(element => {
+                element.textContent = element.getAttribute('data-es');
+            });
+        }
+        
+        // Smooth scrolling for navigation
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -425,85 +626,117 @@
                 }
             });
         });
-
-        // Fade in animation on scroll
-        const observerOptions = {
-            threshold: 0.1,
-            rootMargin: '0px 0px -50px 0px'
-        };
-
-        const observer = new IntersectionObserver((entries) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.style.animationDelay = Math.random() * 0.3 + 's';
-                    entry.target.classList.add('fade-in');
-                }
-            });
-        }, observerOptions);
-
-        document.querySelectorAll('.fade-in').forEach(el => {
-            observer.observe(el);
-        });
-
-        // Parallax effect for hero section
+        
+        // Parallax effect
         window.addEventListener('scroll', () => {
             const scrolled = window.pageYOffset;
             const parallaxElements = document.querySelectorAll('.parallax');
             
             parallaxElements.forEach(element => {
                 const speed = 0.5;
-                element.style.transform = `translateY(${scrolled * speed}px)`;
+                element.style.setProperty('--scroll-y', `${scrolled * speed}px`);
             });
         });
-
-        // Button click animations
-        document.querySelectorAll('button').forEach(button => {
-            button.addEventListener('click', function(e) {
-                // Create ripple effect
-                const ripple = document.createElement('span');
-                const rect = this.getBoundingClientRect();
-                const size = Math.max(rect.width, rect.height);
-                const x = e.clientX - rect.left - size / 2;
-                const y = e.clientY - rect.top - size / 2;
-                
-                ripple.style.width = ripple.style.height = size + 'px';
-                ripple.style.left = x + 'px';
-                ripple.style.top = y + 'px';
-                ripple.classList.add('ripple');
-                
-                this.appendChild(ripple);
-                
-                setTimeout(() => {
-                    ripple.remove();
-                }, 600);
+        
+        // Reviews carousel
+        let currentReview = 0;
+        const reviews = document.querySelectorAll('.review-slide');
+        const dots = document.querySelectorAll('.review-dot');
+        
+        function showReview(index) {
+            reviews.forEach((review, i) => {
+                review.classList.toggle('active', i === index);
+                review.style.display = i === index ? 'block' : 'none';
+            });
+            
+            dots.forEach((dot, i) => {
+                dot.classList.toggle('active', i === index);
+                dot.style.backgroundColor = i === index ? 'var(--accent-color)' : '#9ca3af';
+            });
+        }
+        
+        dots.forEach((dot, index) => {
+            dot.addEventListener('click', () => {
+                currentReview = index;
+                showReview(currentReview);
             });
         });
-
-        // Add ripple effect styles
-        const style = document.createElement('style');
-        style.textContent = `
-            button {
-                position: relative;
-                overflow: hidden;
-            }
-            
-            .ripple {
-                position: absolute;
-                border-radius: 50%;
-                background: rgba(255, 255, 255, 0.3);
-                transform: scale(0);
-                animation: ripple-animation 0.6s linear;
-                pointer-events: none;
-            }
-            
-            @keyframes ripple-animation {
-                to {
-                    transform: scale(4);
-                    opacity: 0;
+        
+        // Auto-rotate reviews
+        setInterval(() => {
+            currentReview = (currentReview + 1) % reviews.length;
+            showReview(currentReview);
+        }, 5000);
+        
+        // Initialize first review
+        showReview(0);
+        
+        // Animate elements on scroll
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -50px 0px'
+        };
+        
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.style.animationDelay = '0s';
+                    entry.target.classList.add('animate-fade-in');
                 }
-            }
-        `;
-        document.head.appendChild(style);
+            });
+        }, observerOptions);
+        
+        document.querySelectorAll('.neumorphic, .menu-card').forEach(el => {
+            observer.observe(el);
+        });
+        
+        // Visitor counter animation
+        function animateCounter() {
+            const counter = document.getElementById('visitorCount');
+            const target = parseInt(counter.textContent.replace(',', ''));
+            const start = target - 50;
+            const duration = 2000;
+            const increment = (target - start) / (duration / 16);
+            let current = start;
+            
+            const timer = setInterval(() => {
+                current += increment;
+                if (current >= target) {
+                    current = target;
+                    clearInterval(timer);
+                }
+                counter.textContent = Math.floor(current).toLocaleString();
+            }, 16);
+        }
+        
+        // Start counter animation when footer is visible
+        const footerObserver = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    animateCounter();
+                    footerObserver.unobserve(entry.target);
+                }
+            });
+        });
+        
+        footerObserver.observe(document.querySelector('footer'));
+        
+        // Form submission
+        document.querySelector('form').addEventListener('submit', (e) => {
+            e.preventDefault();
+            alert(currentLang === 'en' ? 'Reservation request sent! We\'ll contact you soon.' : '¡Solicitud de reserva enviada! Te contactaremos pronto.');
+        });
+        
+        // Add some interactive hover effects
+        document.querySelectorAll('.neumorphic').forEach(element => {
+            element.addEventListener('mouseenter', () => {
+                element.style.transform = 'translateY(-2px)';
+            });
+            
+            element.addEventListener('mouseleave', () => {
+                element.style.transform = 'translateY(0)';
+            });
+        });
     </script>
-<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972a6c59260884fe',t:'MTc1NTc4MjM3OS4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
+<script>(function(){function c(){var b=a.contentDocument||a.contentWindow.document;if(b){var d=b.createElement('script');d.innerHTML="window.__CF$cv$params={r:'972a7c4ff36df82b',t:'MTc1NTc4MzAzMi4wMDAwMDA='};var a=document.createElement('script');a.nonce='';a.src='/cdn-cgi/challenge-platform/scripts/jsd/main.js';document.getElementsByTagName('head')[0].appendChild(a);";b.getElementsByTagName('head')[0].appendChild(d)}}if(document.body){var a=document.createElement('iframe');a.height=1;a.width=1;a.style.position='absolute';a.style.top=0;a.style.left=0;a.style.border='none';a.style.visibility='hidden';document.body.appendChild(a);if('loading'!==document.readyState)c();else if(window.addEventListener)document.addEventListener('DOMContentLoaded',c);else{var e=document.onreadystatechange||function(){};document.onreadystatechange=function(b){e(b);'loading'!==document.readyState&&(document.onreadystatechange=e,c())}}}})();</script></body>
 </html>
